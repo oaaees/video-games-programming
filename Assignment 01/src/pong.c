@@ -35,11 +35,26 @@ void handle_input_pong(struct Pong* pong, ALLEGRO_KEYBOARD_STATE* state)
 {
     if (pong->state == START)
     {
-        if (al_key_down(state, ALLEGRO_KEY_ENTER))
+        if (al_key_down(state, ALLEGRO_KEY_0))
+        {
+            pong->state = SERVE;
+            pong->serving_player = rand() % 2 + 1;
+            pong->player1.AI = true;
+            pong->player2.AI = true;
+        }
+        if (al_key_down(state, ALLEGRO_KEY_1))
+        {
+            pong->state = SERVE;
+            pong->serving_player = rand() % 2 + 1;
+            pong->player1.AI = true;
+        }
+        if (al_key_down(state, ALLEGRO_KEY_2))
         {
             pong->state = SERVE;
             pong->serving_player = rand() % 2 + 1;
         }
+        
+
     }
     else if (pong->state == SERVE)
     {
@@ -111,8 +126,8 @@ void update_pong(struct Pong* pong, double dt)
 {
     if (pong->state == PLAY)
     {
-        update_paddle(&pong->player1, dt);
-        update_paddle(&pong->player2, dt);
+        update_paddle(&pong->player1, &pong->ball, dt);
+        update_paddle(&pong->player2, &pong->ball, dt);
         update_ball(&pong->ball, dt);
 
         struct Hitbox ball_hitbox;
@@ -224,7 +239,7 @@ void render_pong(struct Pong pong, struct Fonts fonts)
 
     if (pong.state == START)
     {
-        al_draw_text(fonts.large_font, al_map_rgb(255, 255, 255), TABLE_WIDTH / 2, TABLE_HEIGHT / 2, ALLEGRO_ALIGN_CENTER, "Press enter to start");
+        al_draw_text(fonts.large_font, al_map_rgb(255, 255, 255), TABLE_WIDTH / 2, TABLE_HEIGHT / 2, ALLEGRO_ALIGN_CENTER, "Select how many players (0, 1 or 2) to start");
     }
     else if (pong.state == SERVE)
     {

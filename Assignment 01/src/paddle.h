@@ -12,9 +12,10 @@
 #pragma once
 
 #include <src/hitbox.h>
+#include <src/ball.h>
 
-struct Paddle
-{
+struct Paddle {
+    bool AI;
     float x;
     float y;
     float width;
@@ -26,6 +27,6 @@ void init_paddle(struct Paddle* paddle, float x, float y, float w, float h);
 
 void build_paddle_hitbox(struct Paddle paddle, struct Hitbox* hitbox);
 
-void update_paddle(struct Paddle* paddle, float dt);
+void update_paddle(struct Paddle* paddle, struct Ball* ball, float dt);
 
 void render_paddle(struct Paddle paddle);

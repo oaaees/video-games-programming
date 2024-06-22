@@ -18,6 +18,10 @@
 #define MAX(a, b) ((a > b) ? a : b)
 #endif
 
+#ifndef ABS
+#define ABS(a) ((a > a * -1) ? a : a * -1)
+#endif
+
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 #define TABLE_WIDTH 432
