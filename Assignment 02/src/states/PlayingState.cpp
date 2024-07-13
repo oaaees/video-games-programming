@@ -19,10 +19,12 @@ PlayingState::PlayingState(StateMachine* sm) noexcept
 
 }
 
-void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _bird) noexcept
+void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _bird, int _score) noexcept
 {
     world = _world;
-    world->reset(true);
+    score = _score;
+
+    if (score == 0 || _world == nullptr) world->reset(true);
     
     if (_bird == nullptr)
     {
@@ -30,19 +32,23 @@ void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _b
             Settings::VIRTUAL_WIDTH / 2 - Settings::BIRD_WIDTH / 2, Settings::VIRTUAL_HEIGHT / 2 - Settings::BIRD_HEIGHT / 2,
             Settings::BIRD_WIDTH, Settings::BIRD_HEIGHT
         );
-    }
+    } 
     else
     {
         bird = _bird;
-        bird->reset(Settings::VIRTUAL_WIDTH / 2 - Settings::BIRD_WIDTH / 2, Settings::VIRTUAL_HEIGHT / 2 - Settings::BIRD_HEIGHT / 2);
+        if (score == 0) bird->reset(Settings::VIRTUAL_WIDTH / 2 - Settings::BIRD_WIDTH / 2, Settings::VIRTUAL_HEIGHT / 2 - Settings::BIRD_HEIGHT / 2);
     }
 }
 
 void PlayingState::handle_inputs(const sf::Event& event) noexcept
 {
-    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left || event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up)
     {
         bird->jump();
+    } 
+    else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
+    {
+        state_machine->change_state("pause", world, bird, score);
     }
 }
 
