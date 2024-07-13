@@ -24,7 +24,7 @@ void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _b
     world = _world;
     score = _score;
 
-    if (score == 0 || _world == nullptr) world->reset(true);
+    if (score == 0) world->reset(true);
     
     if (_bird == nullptr)
     {

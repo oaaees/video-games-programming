@@ -2,8 +2,8 @@
     ISPPJ1 2024
     Study Case: Flappy Bird
 
-    Author: Alejandro Mujica
-    alejandro.j.mujic4@gmail.com
+    Author: Johan Paredes
+    jmpareds@gmail.com
 
     This file contains the declaration of the class PauseState.
 */
