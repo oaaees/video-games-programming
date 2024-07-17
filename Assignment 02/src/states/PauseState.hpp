@@ -11,6 +11,7 @@
 #pragma once
 
 #include <src/World.hpp>
+#include <src/Bird.hpp>
 #include <src/states/BaseState.hpp>
 
 class PauseState: public BaseState

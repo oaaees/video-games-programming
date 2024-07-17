@@ -35,7 +35,6 @@ public:
 
     virtual void render(sf::RenderTarget& target) const noexcept {}
 
-
 protected:
     StateMachine* state_machine;
 };

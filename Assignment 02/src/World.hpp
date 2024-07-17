@@ -37,6 +37,7 @@ public:
     void update(float dt) noexcept;
 
     void render(sf::RenderTarget& target) const noexcept;
+
 private:
     bool generate_logs;
 

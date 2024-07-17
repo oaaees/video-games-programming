@@ -25,6 +25,10 @@ void TitleScreenState::handle_inputs(const sf::Event& event) noexcept
     {
         state_machine->change_state("count_down", world);
     }
+    else if (event.key.code == sf::Keyboard::Num2) 
+    {
+        state_machine->change_state("count_down", world);
+    }
 }
 
 void TitleScreenState::update(float dt) noexcept
